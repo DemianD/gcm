@@ -3,8 +3,8 @@
 namespace NotificationChannels\Gcm;
 
 use Illuminate\Support\ServiceProvider;
+use NotificationChannels\Gcm\Google\Client;
 use Zend\Http\Client\Adapter\Curl;
-use ZendService\Google\Gcm\Client;
 
 class GcmServiceProvider extends ServiceProvider
 {

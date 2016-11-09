@@ -7,8 +7,8 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\Exceptions\SendingFailed;
-use ZendService\Google\Gcm\Client;
-use ZendService\Google\Gcm\Message as Packet;
+use NotificationChannels\Gcm\Google\Client;
+use NotificationChannels\Gcm\Google\Message as Packet;
 
 class GcmChannel
 {

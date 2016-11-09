@@ -9,7 +9,7 @@
  * @package   ZendService_Google\Gcm
  */
 
-namespace ZendService\Google\Gcm;
+namespace NotificationChannels\Gcm\Google;
 
 use ZendService\Google\Exception;
 use Zend\Json\Json;

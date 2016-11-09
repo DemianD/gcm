@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Gcm\GcmMessage;
 use PHPUnit_Framework_TestCase;
 use Mockery;
-use ZendService\Google\Gcm\Client;
+use NotificationChannels\Gcm\Google\Client;
 
 class ChannelTest extends PHPUnit_Framework_TestCase
 {
