@@ -74,6 +74,10 @@ class GcmChannel
 
         $packet->setRegistrationIds($tokens);
         $packet->setCollapseKey(str_slug($message->title));
+    
+        $packet->setTitle($message->title);
+        $packet->setBody($message->message);
+        
         $packet->setData([
                 'title' => $message->title,
                 'message' => $message->message,
