@@ -1,5 +1,5 @@
 {
-    "name": "laravel-notification-channels/gcm",
+    "name": "demian/laravel-notifications-gcm",
     "description": "Android GCM Push Notification Channel",
     "homepage": "https://github.com/laravel-notification-channels/gcm",
     "license": "MIT",
