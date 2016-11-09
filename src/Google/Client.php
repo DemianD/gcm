@@ -10,7 +10,7 @@
  */
 namespace NotificationChannels\Gcm\Google;
 
-use ZendService\Google\Exception;
+use InvalidArgumentException;
 use Zend\Http\Client as HttpClient;
 use Zend\Json\Json;
 
@@ -60,7 +60,7 @@ class Client
     public function setApiKey($apiKey)
     {
         if (!is_string($apiKey) || empty($apiKey)) {
-            throw new Exception\InvalidArgumentException('The api key must be a string and not empty');
+            throw new InvalidArgumentException('The api key must be a string and not empty');
         }
         $this->apiKey = $apiKey;
         return $this;
@@ -95,9 +95,8 @@ class Client
     /**
      * Send Message
      *
-     * @param Mesage $message
-     * @return Response
-     * @throws Exception\RuntimeException
+     * @param \NotificationChannels\Gcm\Google\Message $message
+     * @return \NotificationChannels\Gcm\Google\Response
      */
     public function send(Message $message)
     {
@@ -114,25 +113,25 @@ class Client
         
         switch ($response->getStatusCode()) {
             case 500:
-                throw new Exception\RuntimeException('500 Internal Server Error');
+                throw new RuntimeException('500 Internal Server Error');
                 break;
             case 503:
                 $exceptionMessage = '503 Server Unavailable';
                 if ($retry = $response->getHeaders()->get('Retry-After')) {
                     $exceptionMessage .= '; Retry After: ' . $retry;
                 }
-                throw new Exception\RuntimeException($exceptionMessage);
+                throw new RuntimeException($exceptionMessage);
                 break;
             case 401:
-                throw new Exception\RuntimeException('401 Forbidden; Authentication Error');
+                throw new RuntimeException('401 Forbidden; Authentication Error');
                 break;
             case 400:
-                throw new Exception\RuntimeException('400 Bad Request; invalid message');
+                throw new RuntimeException('400 Bad Request; invalid message');
                 break;
         }
         
         if (!$response = Json::decode($response->getBody(), Json::TYPE_ARRAY)) {
-            throw new Exception\RuntimeException('Response body did not contain a valid JSON response');
+            throw new RuntimeException('Response body did not contain a valid JSON response');
         }
         
         return new Response($response, $message);

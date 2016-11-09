@@ -12,7 +12,7 @@
 
 namespace NotificationChannels\Gcm\Google;
 
-use ZendService\Google\Exception;
+use InvalidArgumentException;
 
 /**
  * Google Cloud Messaging Response
@@ -140,7 +140,7 @@ class Response
             !isset($response['failure']) ||
             !isset($response['canonical_ids']) ||
             !isset($response['multicast_id'])) {
-            throw new Exception\InvalidArgumentException('Response did not contain the proper fields');
+            throw new InvalidArgumentException('Response did not contain the proper fields');
         }
         $this->response = $response;
         $this->results = $response['results'];

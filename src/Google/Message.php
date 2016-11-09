@@ -11,7 +11,8 @@
 
 namespace NotificationChannels\Gcm\Google;
 
-use ZendService\Google\Exception;
+use InvalidArgumentException;
+use RuntimeException;
 use Zend\Json\Json;
 
 /**
@@ -144,7 +145,7 @@ class Message
     public function setCollapseKey($key)
     {
         if (!is_null($key) && !(is_string($key) && strlen($key) > 0)) {
-            throw new Exception\InvalidArgumentException('$key must be null or a non-empty string');
+            throw new InvalidArgumentException('$key must be null or a non-empty string');
         }
         $this->collapseKey = $key;
         return $this;
@@ -187,10 +188,10 @@ class Message
     public function addData($key, $value)
     {
         if (!is_string($key) || empty($key)) {
-            throw new Exception\InvalidArgumentException('$key must be a non-empty string');
+            throw new InvalidArgumentException('$key must be a non-empty string');
         }
         if (array_key_exists($key, $this->data)) {
-            throw new Exception\RuntimeException('$key conflicts with current set data');
+            throw new RuntimeException('$key conflicts with current set data');
         }
         $this->data[$key] = $value;
         return $this;
@@ -305,7 +306,7 @@ class Message
     public function setRestrictedPackageName($name)
     {
         if (!is_null($name) && !(is_string($name) && strlen($name) > 0)) {
-            throw new Exception\InvalidArgumentException('$name must be null OR a non-empty string');
+            throw new InvalidArgumentException('$name must be null OR a non-empty string');
         }
         $this->restrictedPackageName = $name;
         return $this;
